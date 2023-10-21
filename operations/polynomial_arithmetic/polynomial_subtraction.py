@@ -1,14 +1,13 @@
-def polynomial_addition(f : list, g : list, p : int):
+def polynomial_subtraction(f : list, g : list, p : int):
     answer = []
     minimum = min(len(f), len(g))
     maximum = max(len(f), len(g))
 
-    
     for i in range(minimum):
-        if g[i] + f[i] >= p:
-            answer.append(g[i] + f[i] - p)
+        if f[i] - g[i] < 0:
+            answer.append(f[i] - g[i] + p)
         else:
-            answer.append(g[i] + f[i])
+            answer.append(f[i] - g[i])
 
     for i in range(minimum, maximum):
         if len(f) > len(g):
@@ -20,7 +19,7 @@ def polynomial_addition(f : list, g : list, p : int):
 
 
 # Test 1
-# first = [2, 1, 1]
+# first = [2, 1]
 # second = [1, 1]
 # p = 3
 # print(polynomial_addition(first, second, p))
