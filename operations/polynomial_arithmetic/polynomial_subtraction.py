@@ -13,7 +13,7 @@ def polynomial_subtraction(f : list, g : list, p : int):
         if len(f) > len(g):
             answer.append(f[i])
         else:
-            answer.append(g[i])
+            answer.append(p - g[i])
     
     return answer 
 

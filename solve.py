@@ -17,6 +17,9 @@
 # Import built-in json library for handling input/output 
 import json
 
+from operations.polynomial_arithmetic.polynomial_addition import polynomial_addition
+from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
+
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -38,10 +41,10 @@ def solve_exercise(exercise_location : str, answer_location : str):
     if exercise["type"] == "polynomial_arithmetic":
         # Check what task within the polynomial arithmetic tasks we need to perform
         if exercise["task"] == "addition":
-            # Solve polynomial arithmetic addition exercise
+            polynomial_addition(exercise["f"], exercise["g"], exercise["p"])
             pass
         elif exercise["task"] == "subtraction":
-            # Solve polynomial arithmetic subtraction exercise
+            polynomial_subtraction(exercise["f"], exercise["g"], exercise["p"])
             pass
         # et cetera
     else: # exercise["type"] == "finite_field_arithmetic"
