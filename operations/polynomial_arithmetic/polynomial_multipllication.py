@@ -60,8 +60,8 @@ def polynomial_multiplication(f, g, p):
     return [x % p for x in result]
 
 # Test
-f = [1, 2, 3]
-g = [4, 5]
-p = 1000000007
-answer = polynomial_multiplication(f, g, p)
-print(answer)  # Expected: [4, 13, 22, 15]
+# f = [1, 2, 3]
+# g = [4, 5]
+# p = 1000000007
+# answer = polynomial_multiplication(f, g, p)
+# print(answer)  # Expected: [4, 13, 22, 15]
