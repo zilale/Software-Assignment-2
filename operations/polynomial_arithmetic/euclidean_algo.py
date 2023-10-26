@@ -2,7 +2,7 @@ from polynomial_multiplication import polynomial_multiplication
 from polynomial_subtraction import polynomial_subtraction
 from polynomial_longdivision import polynomial_long_division, remove_leading_zeros
 
-def extended_euclidefn_flgo(f, g, p):
+def extended_euclidean_algorithm(f, g, p):
     x, v, y, u = [1], [0], [0], [1]
     helper = False
 
@@ -36,7 +36,7 @@ def extended_euclidefn_flgo(f, g, p):
     remove_leading_zeros(gcd)
     return a, b, gcd
 
-def test_extended_euclidefn_flgo():
+def test_extended_euclidean_algorithm():
     # Test case 1
     f = [1, 1, 1]
     g = [1, 1]
@@ -44,8 +44,8 @@ def test_extended_euclidefn_flgo():
     expected_a = [2, 3]
     expected_b = [4, 1]
     expected_gcd = ([1, 1], [1], 5)
-    print(extended_euclidefn_flgo(f, g, p))
-    assert extended_euclidefn_flgo(f, g, p) == (expected_a, expected_b, expected_gcd)
+    print(extended_euclidean_algorithm(f, g, p))
+    assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
 
     # Test case 2
     f = [1, 2, 1]
@@ -54,8 +54,8 @@ def test_extended_euclidefn_flgo():
     expected_a = [3]
     expected_b = [2, 3]
     expected_gcd = ([1, 1], [1], 5)
-    print(extended_euclidefn_flgo(f, g, p))
-    assert extended_euclidefn_flgo(f, g, p) == (expected_a, expected_b, expected_gcd)
+    print(extended_euclidean_algorithm(f, g, p))
+    assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
 
     # Test case 3
     f = [1, 1, 1]
@@ -64,8 +64,8 @@ def test_extended_euclidefn_flgo():
     expected_a = [1, 1]
     expected_b = [1]
     expected_gcd = ([1, 1], [1], 2)
-    print(extended_euclidefn_flgo(f, g, p))
-    assert extended_euclidefn_flgo(f, g, p) == (expected_a, expected_b, expected_gcd)
+    print(extended_euclidean_algorithm(f, g, p))
+    assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
 
     # Test case 4
     f = [1, 1, 1]
@@ -74,7 +74,7 @@ def test_extended_euclidefn_flgo():
     expected_a = [1, 2]
     expected_b = [1]
     expected_gcd = ([1, 1], [1], 3)
-    print(extended_euclidefn_flgo(f, g, p))
-    assert extended_euclidefn_flgo(f, g, p) == (expected_a, expected_b, expected_gcd)
+    print(extended_euclidean_algorithm(f, g, p))
+    assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
 
-test_extended_euclidefn_flgo()
+test_extended_euclidean_algorithm()
