@@ -20,6 +20,10 @@ import json
 from operations.polynomial_arithmetic.polynomial_addition import polynomial_addition
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 
+from operations.finite_fields.addition import finiteFieldsAddition
+from operations.finite_fields.subtraction import finiteFieldsSubtraction
+from operations.finite_fields.multiplication import finiteFieldsMultiplication
+from operations.finite_fields.division import finiteFieldsDivision
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -41,17 +45,26 @@ def solve_exercise(exercise_location : str, answer_location : str):
     if exercise["type"] == "polynomial_arithmetic":
         # Check what task within the polynomial arithmetic tasks we need to perform
         if exercise["task"] == "addition":
-            polynomial_addition(exercise["f"], exercise["g"], exercise["p"])
-            pass
+            answer = polynomial_addition(exercise["f"], exercise["g"], exercise["p"])
+            
         elif exercise["task"] == "subtraction":
-            polynomial_subtraction(exercise["f"], exercise["g"], exercise["p"])
-            pass
+            answer = polynomial_subtraction(exercise["f"], exercise["g"], exercise["p"])
+            
         # et cetera
-    else: # exercise["type"] == "finite_field_arithmetic"
+    elif  exercise["type"] == "finite_field_arithmetic":
         # Check what task within the finite field arithmetic tasks we need to perform
         if exercise["task"] == "addition":
-            # Solve finite field arithmetic addition exercise
-            pass
+            answer = finiteFieldsAddition(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            
+        elif exercise["task"] == "subtraction":
+            answer = finiteFieldsSubtraction(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            
+        elif exercise["task"] == "multiplication":
+            answer = finiteFieldsMultiplication(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            
+        elif exercise["task"] == "division":
+            answer = finiteFieldsDivision(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            
         # et cetera
 
 
