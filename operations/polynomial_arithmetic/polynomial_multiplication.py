@@ -12,6 +12,10 @@ def remove_leading_zeros(lst):
     return lst
 
 def polynomial_multiplication(f, g, p):
+
+    if not f or not g:
+        return [0]
+
     n = max(len(f), len(g))
     n = next_power_of_2(n)  # Pad to the next power of 2
     
@@ -59,9 +63,52 @@ def polynomial_multiplication(f, g, p):
     
     return [x % p for x in result]
 
-# Test
+# # 1. Basic Cases
 # f = [1, 2, 3]
 # g = [4, 5]
 # p = 1000000007
-# answer = polynomial_multiplication(f, g, p)
-# print(answer)  # Expected: [4, 13, 22, 15]
+# assert polynomial_multiplication(f, g, p) == [4, 13, 22, 15]
+
+# f = [1]
+# g = [1]
+# p = 1000000007
+# assert polynomial_multiplication(f, g, p) == [1]
+
+# # 2. Zero Cases
+# f = [0, 0, 0]
+# g = [0, 0, 0]
+# p = 1000000007
+# assert polynomial_multiplication(f, g, p) == []
+
+# f = [1, 2, 3]
+# g = [0, 0]
+# p = 1000000007
+# assert polynomial_multiplication(f, g, p) == []
+
+# # 3. Large Number Cases
+# f = [987654321]
+# g = [123456789]
+# p = 1000000007
+# answer = 987654321 * 123456789 % p  
+# p = 1000000007
+# assert polynomial_multiplication(f, g, p) == [answer]
+
+# f = [999999999, 888888888]
+# g = [777777777, 666666666]
+# p = 1000000007
+# assert polynomial_multiplication(f, g, p) == [999999999 * 777777777 % p, (777777777 * 888888888 % p + 999999999 * 666666666 % p) % p, 888888888 * 666666666 % p]
+
+# # 4. Edge Cases
+# f = [1, 2, 3, 4]
+# g = [5, 6, 7, 8]
+# p = 1000000007
+# assert polynomial_multiplication(f, g, p) == [5, 16, 34, 60, 61, 52, 32]
+
+# f = []
+# g = []
+# p = 1000000007
+# print(polynomial_multiplication(f, g, p))
+# assert polynomial_multiplication(f, g, p) == [0]
+
+# print("All tests passed!")
+

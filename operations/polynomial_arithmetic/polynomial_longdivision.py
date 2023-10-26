@@ -1,41 +1,49 @@
+from polynomial_addition import polynomial_addition
+from polynomial_multiplication import polynomial_multiplication
 from polynomial_subtraction import polynomial_subtraction
 
-def extended_gcd(a, b):
-    if a == 0:
-        return (b, 0, 1)
-    else:
-        g, x, y = extended_gcd(b % a, a)
-        return (g, y - (b // a) * x, x)
 
-def inverse(num, p):
-    g, x, _ = extended_gcd(num, p)
-    return x % p
-    
-
-def multiply_polynomial_by_scalar(f, scalar, p):
-    return [(x * scalar) % p for x in f]
+def remove_leading_zeros(f):
+    for i in range(len(f)):
+        if f[-1] == 0 and f.count(f[0]) != len(f):
+            del f[-1]
+        else:
+            break
 
 def polynomial_long_division(f, g, p):
-    
-    q = [0] * max(1, len(f) - len(g) + 1)
-    r = f[:]
-    
-    while len(r) >= len(g):
-        leading_term_position = len(r) - len(g)
-        factor = (r[-1] * inverse(g[-1], p)) % p
-        q[leading_term_position] = factor
+     #initializing the quotient
+        q = [0]
+        r = f.copy()
 
-        subtract_term = multiply_polynomial_by_scalar(g, factor, p)
-        subtract_term = [0] * leading_term_position + subtract_term
-        r = polynomial_subtraction(r, subtract_term, p)
-        
-        while r and r[-1] == 0:
-            r.pop()
+        # while the degree of r is greater than or equal to the degree of g
+        while ((len(r) - 1) >= (len(g) - 1)):
 
-    return q, r
+            # add the quotient to the answer
+            intermediate = [0] * (len(r) - len(g) + 1)    
+            intermediate[len(r) - len(g)] = r[len(r) - 1] * pow(g[len(g) - 1], -1, p)
 
-f = [4, 0, -3, 1]  # Represents 4 - 3x^2 + x^3
-g = [1, -1]  # Represents 1 - x
-q, r = polynomial_long_division(f, g, 1000000007)
-assert q == [1, 1, 1]  # x^2 + x + 1
-assert r == [5]
+            q = polynomial_addition(q, intermediate,p)
+
+            intermediateAdd = [0] * (len(r) - len(g) + 1)
+            intermediateAdd[len(r) - len(g)] = (r[len(r) - 1] * pow(g[len(g) - 1], -1, p))
+
+            # remainder is equal to the remainder minus the product of the quotient and the divisor
+            r = polynomial_subtraction(r, polynomial_multiplication(intermediateAdd, g, p),p)
+
+            del r[len(r) - 1]
+
+
+        # remove leading zeros
+        q[-1] = q[-1] % p
+        remove_leading_zeros(q)
+        remove_leading_zeros(r)
+        return q, r
+
+# Example usage:
+# f = [1, 0, 2]  # Represents 1 + 2X^2
+# g = [1, 1]    # Represents 1 + X
+# p = 3
+
+# q, r = polynomial_long_division(f, g, p)
+# print("Quotient:", q)  # Expected: [2]
+# print("Remainder:", r) # Expected: [1]
