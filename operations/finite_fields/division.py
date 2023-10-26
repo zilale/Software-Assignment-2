@@ -2,6 +2,6 @@ from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_
 
 # Finite field arithmetic division
 def finiteFieldsDivision(f, g, m, h):
-    q = division(f, g, m)
-    z = division(q, h, m)
+    q, r = division(f, g, m)
+    z, r = division(q, h, m)
     return z

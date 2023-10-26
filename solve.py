@@ -19,11 +19,14 @@ import json
 
 from operations.polynomial_arithmetic.polynomial_addition import polynomial_addition
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
+from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
+from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_long_division
 
 from operations.finite_fields.addition import finiteFieldsAddition
 from operations.finite_fields.subtraction import finiteFieldsSubtraction
 from operations.finite_fields.multiplication import finiteFieldsMultiplication
 from operations.finite_fields.division import finiteFieldsDivision
+from operations.finite_fields.inverse import finiteFieldsInversion
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -49,6 +52,12 @@ def solve_exercise(exercise_location : str, answer_location : str):
             
         elif exercise["task"] == "subtraction":
             answer = polynomial_subtraction(exercise["f"], exercise["g"], exercise["p"])
+        
+        elif exercise["task"] == "multiplication":
+            answer = polynomial_multiplication(exercise["f"], exercise["g"], exercise["p"])
+        
+        elif exercise["task"] == "division":
+            answer = polynomial_long_division(exercise["f"], exercise["g"], exercise["p"])
             
         # et cetera
     elif  exercise["type"] == "finite_field_arithmetic":
@@ -64,6 +73,9 @@ def solve_exercise(exercise_location : str, answer_location : str):
             
         elif exercise["task"] == "division":
             answer = finiteFieldsDivision(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+        
+        elif exercise["task"] == "inversion":
+            answer = finiteFieldsInversion(exercise["f"], exercise["m"], exercise["h"])
             
         # et cetera
 
