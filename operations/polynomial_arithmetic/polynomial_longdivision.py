@@ -10,6 +10,9 @@ def remove_leading_zeros(f):
         else:
             break
 
+def polynomial_long_division(f, g, p):
+    if all(coef == 0 for coef in g):  # Check if g is the zero polynomial
+        raise ValueError("Division by zero polynomial is undefined!")
 
     q = []
     r = f.copy()
