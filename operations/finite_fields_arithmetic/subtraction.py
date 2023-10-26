@@ -2,6 +2,6 @@ from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction as subtraction
 
 # Finite field arithmetic subtraction
-def finiteFieldsSubtraction(f, g, m, h):
+def finite_fields_subtraction(f, g, m, h):
     x = division(subtraction(f, g, m), h, m)
     return x[1]

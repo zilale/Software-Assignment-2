@@ -22,11 +22,11 @@ from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_s
 from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
 from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_long_division
 
-from operations.finite_fields.addition import finiteFieldsAddition
-from operations.finite_fields.subtraction import finiteFieldsSubtraction
-from operations.finite_fields.multiplication import finiteFieldsMultiplication
-from operations.finite_fields.division import finiteFieldsDivision
-from operations.finite_fields.inverse import finiteFieldsInversion
+from operations.finite_fields_arithmetic.addition import finite_fields_addition
+from operations.finite_fields_arithmetic.subtraction import finite_fields_subtraction
+from operations.finite_fields_arithmetic.multiplication import finite_fields_multiplication
+from operations.finite_fields_arithmetic.division import finite_fields_division
+from operations.finite_fields_arithmetic.inverse import finite_fields_inversion
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -63,19 +63,19 @@ def solve_exercise(exercise_location : str, answer_location : str):
     elif  exercise["type"] == "finite_field_arithmetic":
         # Check what task within the finite field arithmetic tasks we need to perform
         if exercise["task"] == "addition":
-            answer = finiteFieldsAddition(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_addition(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
             
         elif exercise["task"] == "subtraction":
-            answer = finiteFieldsSubtraction(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_subtraction(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
             
         elif exercise["task"] == "multiplication":
-            answer = finiteFieldsMultiplication(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_multiplication(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
             
         elif exercise["task"] == "division":
-            answer = finiteFieldsDivision(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_division(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
         
         elif exercise["task"] == "inversion":
-            answer = finiteFieldsInversion(exercise["f"], exercise["m"], exercise["h"])
+            answer = finite_fields_inversion(exercise["f"], exercise["m"], exercise["h"])
             
         # et cetera
 
