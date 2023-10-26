@@ -10,40 +10,42 @@ def remove_leading_zeros(f):
         else:
             break
 
-def polynomial_long_division(f, g, p):
-     #initializing the quotient
-        q = [0]
-        r = f.copy()
 
-        # while the degree of r is greater than or equal to the degree of g
-        while ((len(r) - 1) >= (len(g) - 1)):
+    q = []
+    r = f.copy()
 
-            # add the quotient to the answer
-            intermediate = [0] * (len(r) - len(g) + 1)    
-            intermediate[len(r) - len(g)] = r[len(r) - 1] * pow(g[len(g) - 1], -1, p)
+    while len(r) >= len(g):
+        # Calculate the factor to make the leading coefficient of r match the leading coefficient of g
+        term_mul_factor = r[-1] * pow(g[-1], -1, p)
+        term_mul_position = len(r) - len(g)
 
-            q = polynomial_addition(q, intermediate,p)
+        intermediate = [0] * (term_mul_position + 1)
+        intermediate[term_mul_position] = term_mul_factor
+        q = polynomial_addition(q, intermediate, p)
 
-            intermediateAdd = [0] * (len(r) - len(g) + 1)
-            intermediateAdd[len(r) - len(g)] = (r[len(r) - 1] * pow(g[len(g) - 1], -1, p))
-
-            # remainder is equal to the remainder minus the product of the quotient and the divisor
-            r = polynomial_subtraction(r, polynomial_multiplication(intermediateAdd, g, p),p)
-
-            del r[len(r) - 1]
-
-
-        # remove leading zeros
-        q[-1] = q[-1] % p
-        remove_leading_zeros(q)
+        subtracted = polynomial_multiplication(intermediate, g, p)
+        r = polynomial_subtraction(r, subtracted, p)
         remove_leading_zeros(r)
-        return q, r
+
+        # If the remainder becomes the zero polynomial, break
+        if not r:
+            break
+
+    return q, r
 
 # Example usage:
-f = [1, 0, 2]  # Represents 1 + 2X^2
-g = [1, 1]    # Represents 1 + X
-p = 3
+# f = [1, 0]  # Represents 1X
+# g = [1]    # Represents 1
 
-q, r = polynomial_long_division(f, g, p)
-print("Quotient:", q)  # Expected: [2]
-print("Remainder:", r) # Expected: [1]
+# q, r = polynomial_long_division(f, g, 3)
+# print("Quotient:", q)  # Expected: [1, 0]
+# print("Remainder:", r) # Expected: []
+
+# # # Example usage:
+# # f = [1, 0, 2]  # Represents 1 + 2X^2
+# # g = [1, 1]    # Represents 1 + X
+# # p = 3
+
+# # q, r = polynomial_long_division(f, g, p)
+# # print("Quotient:", q)  # Expected: [2]
+# # print("Remainder:", r) # Expected: [1]
