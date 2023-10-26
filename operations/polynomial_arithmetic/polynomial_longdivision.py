@@ -40,10 +40,10 @@ def polynomial_long_division(f, g, p):
         return q, r
 
 # Example usage:
-# f = [1, 0, 2]  # Represents 1 + 2X^2
-# g = [1, 1]    # Represents 1 + X
-# p = 3
+f = [1, 0, 2]  # Represents 1 + 2X^2
+g = [1, 1]    # Represents 1 + X
+p = 3
 
-# q, r = polynomial_long_division(f, g, p)
-# print("Quotient:", q)  # Expected: [2]
-# print("Remainder:", r) # Expected: [1]
+q, r = polynomial_long_division(f, g, p)
+print("Quotient:", q)  # Expected: [2]
+print("Remainder:", r) # Expected: [1]
