@@ -20,13 +20,15 @@ import json
 from operations.polynomial_arithmetic.polynomial_addition import polynomial_addition
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
-from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_long_division
+from operations.polynomial_arithmetic.polynomial_longdivision import remove_leading_zeros
+from operations.polynomial_arithmetic.euclidean_algo import extended_euclidefn_flgo
 
 from operations.finite_fields_arithmetic.addition import finite_fields_addition
 from operations.finite_fields_arithmetic.subtraction import finite_fields_subtraction
 from operations.finite_fields_arithmetic.multiplication import finite_fields_multiplication
 from operations.finite_fields_arithmetic.division import finite_fields_division
 from operations.finite_fields_arithmetic.inverse import finite_fields_inversion
+from operations.finite_fields_arithmetic.primitivity_check import primitivity_checking
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -56,8 +58,11 @@ def solve_exercise(exercise_location : str, answer_location : str):
         elif exercise["task"] == "multiplication":
             answer = polynomial_multiplication(exercise["f"], exercise["g"], exercise["p"])
         
-        elif exercise["task"] == "division":
-            answer = polynomial_long_division(exercise["f"], exercise["g"], exercise["p"])
+        elif exercise["task"] == "long_division":
+            answer = remove_leading_zeros(exercise["f"], exercise["g"], exercise["p"])
+        
+        elif exercise["task"] == "extended_euclidean_algorithm":
+            answer = extended_euclidefn_flgo(exercise["f"], exercise["g"], exercise["p"])
             
         # et cetera
     elif  exercise["type"] == "finite_field_arithmetic":
@@ -76,6 +81,9 @@ def solve_exercise(exercise_location : str, answer_location : str):
         
         elif exercise["task"] == "inversion":
             answer = finite_fields_inversion(exercise["f"], exercise["m"], exercise["h"])
+        
+        elif exercise["task"] == "primitivity_check":
+            answer = primitivity_checking(exercise["f"], exercise["m"], exercise["h"])
             
         # et cetera
 
