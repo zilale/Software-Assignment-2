@@ -8,9 +8,9 @@
 # group_number 
 #
 # Author names and student IDs:
-# Žilvinas Isac Cocks 1703749
+# Žilvinas Aleksa 1703749
 # Ainius Sinickas 1704919
-# Jonas Mieliauskas 1719408
+# Jonas Mieliauskas 1719408g
 # Gustas Šimkus 1704917
 ##
 
