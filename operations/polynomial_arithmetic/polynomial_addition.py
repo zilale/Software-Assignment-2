@@ -1,27 +1,19 @@
-def polynomial_addition(f : list, g : list, p : int):
 
-    # define answer list
+def polynomial_addition(f, g, m):
     answer = []
-    minimum = min(len(f), len(g))
-    maximum = max(len(f), len(g))
+    maximum = max(len(f), len(g)) 
+    minimum = min(len(f), len(g)) 
 
-    # add elements of f and g to answer list
-    # if sum of elements is greater than p, subtract p from sum
-    for i in range(minimum):
-        if g[i] + f[i] >= p:
-            answer.append(g[i] + f[i] - p)
-        else:
-            answer.append(g[i] + f[i])
-
-    # add remaining elements of f or g to answer list
-    # if f or g is longer than the other, add remaining elements to answer list
-    for i in range(minimum, maximum):
-        if len(f) > len(g):
-            answer.append(f[i])
-        else:
-            answer.append(g[i])
-    
-    return answer 
+    #appending 0s to answer list based on polynomial size to index it later
+    for i in range(maximum): 
+        if (i < minimum): 
+            answer.append((f[i] + g[i]) % m)
+        else: 
+            if (len(f) > len(g)):
+                answer.append(f[i])
+            else:
+                answer.append(g[i])
+    return answer
 
 
 # Test 1
