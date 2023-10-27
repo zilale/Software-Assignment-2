@@ -6,7 +6,7 @@ def irreducible_element_generation(m,n):
     for i in range(n+1):
         poly.append(random.randint(0, m-1))
 
-    while irreducibilityCheck(poly, m) == False:
+    while irreducibility_check(poly, m) == False:
         poly = []
         for i in range(n+1):
             poly.append(random.randint(0, m-1))
