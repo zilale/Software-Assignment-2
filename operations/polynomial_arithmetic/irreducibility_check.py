@@ -11,9 +11,9 @@ def irreducibility_check(f, p):
 
         # Check if the gcd is 1 and all other coefficients are 0
         if len(gcd_coeffs) == 1 and gcd_coeffs[0] == 1:
-            return False  # Polynomial is reducible
+            return True  # Polynomial is reducible
         elif all(coeff == 0 for i, coeff in enumerate(gcd_coeffs) if i != 0):
-            return True  # Polynomial is irreducible
+            return False  # Polynomial is irreducible
 
         t += 1
 
