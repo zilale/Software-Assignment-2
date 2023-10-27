@@ -102,10 +102,9 @@ def solve_exercise(exercise_location : str, answer_location : str):
     answer = {"answer": answer}
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
-    print(answer)
     with open(answer_location, "w") as answer_file:
         # Serialize Python answer data (stored in answer) to JSON answer data and write it to answer_file
         json.dump(answer, answer_file, indent=4)
 
-solve_exercise("./Exercises/exercise3.json", "./Answers/answer_3.json")
+# solve_exercise("./Exercises/exercise3.json", "./Answers/answer_3.json")
     
