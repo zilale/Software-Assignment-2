@@ -1,3 +1,5 @@
+import random
+
 def primitive_element_generation(m, h):
         poly = []
 
