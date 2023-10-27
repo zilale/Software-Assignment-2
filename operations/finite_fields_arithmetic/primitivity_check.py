@@ -1,6 +1,5 @@
 from operations.finite_fields_arithmetic.multiplication import finite_fields_multiplication as multiplication
 
-# Function to find the prime factors of a number
 def find_prime_factors(n):
     prime_factors = []
     i = 2
@@ -13,7 +12,6 @@ def find_prime_factors(n):
         prime_factors.append(n)
     return prime_factors
 
-# Function for checking Primitivity of a polynomial under a finite field
 def primitivity_checking(f, m, h):
     q = m**(len(h) - 1)
     pf = find_prime_factors(q-1)

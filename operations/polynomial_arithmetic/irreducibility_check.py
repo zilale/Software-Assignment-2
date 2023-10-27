@@ -17,7 +17,5 @@ def irreducibility_check(f, p):
 
         t += 1
 
-    return True  # If we reach this point, the polynomial is irreducible
-f = [1,1,0,1]
-p = 2
-# print(irreducibility_check(f, p))
+    return False  # If we reach this point, the polynomial is irreducible
+
