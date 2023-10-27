@@ -1,6 +1,6 @@
-from polynomial_multiplication import polynomial_multiplication
-from polynomial_subtraction import polynomial_subtraction
-from polynomial_longdivision import polynomial_long_division, remove_leading_zeros
+from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
+from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
+from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_long_division, remove_leading_zeros
 
 def extended_euclidean_algorithm(f, g, p):
     x, v, y, u = [1], [0], [0], [1]
@@ -77,4 +77,4 @@ def test_extended_euclidean_algorithm():
     print(extended_euclidean_algorithm(f, g, p))
     assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
 
-test_extended_euclidean_algorithm()
+# test_extended_euclidean_algorithm()

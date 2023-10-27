@@ -1,6 +1,6 @@
-from polynomial_addition import polynomial_addition
-from polynomial_multiplication import polynomial_multiplication
-from polynomial_subtraction import polynomial_subtraction
+from operations.polynomial_arithmetic.polynomial_addition import polynomial_addition
+from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
+from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 
 
 def remove_leading_zeros(f):

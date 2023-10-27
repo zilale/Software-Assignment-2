@@ -1,4 +1,4 @@
-from euclidean_algo import extended_euclidean_algorithm
+from operations.polynomial_arithmetic.euclidean_algo import extended_euclidean_algorithm
 def irreducibility_check(f, p):
     n = len(f) - 1  # Degree of the polynomial
     t = 1
