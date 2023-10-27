@@ -6,84 +6,62 @@ def next_power_of_2(n):
     return power
 
 def remove_leading_zeros(lst):
-    # Remove leading zeros from a list
-    while lst and lst[-1] == 0:
-        lst.pop()
-    return lst
+    for i in range(len(lst)):
+        if lst[-1] == 0 and lst.count(lst[0]) != len(lst): ##keep removing zeroes if last element is 0 and making sure to not make it an empty array if it's only 0
+            del lst[-1]
+        else:
+            break
 
+# Function to answeriply two polynomials f and g under the given modulus m
+# Input: Two polynomials f and g in F[x] represented as arrays of coefficients
+#        and a modulus m
+# Output: A polynomial representing f * g under the given modulus m
+# Example:
+# f = [2, 1, 1]
+# g = [1, 1]
+# p = 3
 def polynomial_multiplication(f, g, p):
+    answer = []
+    maximum = max(len(f), len(g)) 
+    minimum = min(len(f), len(g)) 
 
-    if not f or not g:
-        return [0]
+    #appending 0s to answer list based on polynomial size to index it later
+    answer.extend([0] * (maximum + minimum - 1))
+    
+    #checking if deg of polynomial f is greater than polynomial g
+    if (len(f) > len(g)):
+        for i in range(maximum):
+            for j in range(minimum):
+                answer[i+j] = (answer[i+j] + (f[i] * g[j])%p)%p
+    else:
+        for i in range(maximum):
+            for j in range(minimum):
+                answer[i+j] = (answer[i+j] + (g[i] * f[j])%p)%p
+    return answer
 
-    n = max(len(f), len(g))
-    n = next_power_of_2(n)  # Pad to the next power of 2
-    
-    # Pad with zeros to make lengths equal and a power of 2
-    while len(f) < n:
-        f.append(0)
-    while len(g) < n:
-        g.append(0)
-    
-    # Base case: If the polynomial is of degree 0 or 1
-    if n == 1:
-        return [(f[0] * g[0]) % p]
-    
-    # Split the polynomials into two halves
-    mid = n // 2
-    f0, f1 = f[:mid], f[mid:]
-    g0, g1 = g[:mid], g[mid:]
-    
-    # Recursive multiplication
-    f0g0 = polynomial_multiplication(f0, g0, p)
-    f1g1 = polynomial_multiplication(f1, g1, p)
-    f0_plus_f1 = [(a + b) % p for a, b in zip(f0, f1)]
-    g0_plus_g1 = [(a + b) % p for a, b in zip(g0, g1)]
-    middle_term = polynomial_multiplication(f0_plus_f1, g0_plus_g1, p)
-    
-    # Correctly compute the middle term considering possible different lengths
-    for i in range(len(middle_term)):
-        if i < len(f0g0):
-            middle_term[i] -= f0g0[i]
-        if i < len(f1g1):
-            middle_term[i] -= f1g1[i]
-        middle_term[i] %= p
-    
-    # Combine the results
-    result = [0] * (2 * n - 1)
-    for i in range(len(f0g0)):
-        result[i] += f0g0[i]
-    for i in range(len(middle_term)):
-        result[i + mid] += middle_term[i]
-    for i in range(len(f1g1)):
-        result[i + 2 * mid] += f1g1[i]
-    
-    # Remove leading zeros
-    result = remove_leading_zeros(result)
-    
-    return [x % p for x in result]
+
 
 # # 1. Basic Cases
 # f = [1, 2, 3]
 # g = [4, 5]
 # p = 1000000007
-# assert polynomial_multiplication(f, g, p) == [4, 13, 22, 15]
+# assert polynomial_answeriplication(f, g, p) == [4, 13, 22, 15]
 
 # f = [1]
 # g = [1]
 # p = 1000000007
-# assert polynomial_multiplication(f, g, p) == [1]
+# assert polynomial_answeriplication(f, g, p) == [1]
 
 # # 2. Zero Cases
 # f = [0, 0, 0]
 # g = [0, 0, 0]
 # p = 1000000007
-# assert polynomial_multiplication(f, g, p) == []
+# assert polynomial_answeriplication(f, g, p) == []
 
 # f = [1, 2, 3]
 # g = [0, 0]
 # p = 1000000007
-# assert polynomial_multiplication(f, g, p) == []
+# assert polynomial_answeriplication(f, g, p) == []
 
 # # 3. Large Number Cases
 # f = [987654321]
@@ -91,24 +69,24 @@ def polynomial_multiplication(f, g, p):
 # p = 1000000007
 # answer = 987654321 * 123456789 % p  
 # p = 1000000007
-# assert polynomial_multiplication(f, g, p) == [answer]
+# assert polynomial_answeriplication(f, g, p) == [answer]
 
 # f = [999999999, 888888888]
 # g = [777777777, 666666666]
 # p = 1000000007
-# assert polynomial_multiplication(f, g, p) == [999999999 * 777777777 % p, (777777777 * 888888888 % p + 999999999 * 666666666 % p) % p, 888888888 * 666666666 % p]
+# assert polynomial_answeriplication(f, g, p) == [999999999 * 777777777 % p, (777777777 * 888888888 % p + 999999999 * 666666666 % p) % p, 888888888 * 666666666 % p]
 
 # # 4. Edge Cases
 # f = [1, 2, 3, 4]
 # g = [5, 6, 7, 8]
 # p = 1000000007
-# assert polynomial_multiplication(f, g, p) == [5, 16, 34, 60, 61, 52, 32]
+# assert polynomial_answeriplication(f, g, p) == [5, 16, 34, 60, 61, 52, 32]
 
 # f = []
 # g = []
 # p = 1000000007
-# print(polynomial_multiplication(f, g, p))
-# assert polynomial_multiplication(f, g, p) == [0]
+# print(polynomial_answeriplication(f, g, p))
+# assert polynomial_answeriplication(f, g, p) == [0]
 
 # print("All tests passed!")
 
