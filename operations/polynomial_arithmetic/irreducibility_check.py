@@ -1,4 +1,4 @@
-from euclidean_algo import extended_euclidefn_flgo
+from euclidean_algo import extended_euclidean_algorithm
 def irreducibility_check(f, p):
     n = len(f) - 1  # Degree of the polynomial
     t = 1
@@ -7,7 +7,7 @@ def irreducibility_check(f, p):
         sum_poly[p ** t] = 1
         sum_poly[1] = -1
 
-        x, y, gcd_coeffs = extended_euclidefn_flgo(f, sum_poly, p)
+        x, y, gcd_coeffs = extended_euclidean_algorithm(f, sum_poly, p)
 
         # Check if the gcd is 1 and all other coefficients are 0
         if len(gcd_coeffs) == 1 and gcd_coeffs[0] == 1:
