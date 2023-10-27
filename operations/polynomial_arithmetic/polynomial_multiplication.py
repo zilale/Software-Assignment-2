@@ -5,12 +5,16 @@ def next_power_of_2(n):
         power *= 2
     return power
 
-def remove_leading_zeros(lst):
-    for i in range(len(lst)):
-        if lst[-1] == 0 and lst.count(lst[0]) != len(lst): ##keep removing zeroes if last element is 0 and making sure to not make it an empty array if it's only 0
-            del lst[-1]
-        else:
-            break
+def remove_leading_zeros(f):
+    helper = 0
+    reversed = f[::-1]
+    for i in reversed:
+        if i != 0:
+            if helper > 0:   return f[:-helper]
+            else:  return f
+        helper  += 1 
+    return [0]
+
 
 # Function to answeriply two polynomials f and g under the given modulus m
 # Input: Two polynomials f and g in F[x] represented as arrays of coeffihelper1ents
