@@ -1,6 +1,6 @@
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 
-def multiplyConstant(f: list, c: int, p: int):
+def multiply_constant(f, c, p):
     h = f.copy()
     for i in range(0, len(h)):
         h[i] = (c*h[i]) % p
@@ -26,7 +26,7 @@ def remove_leading_zeros(a):
 def multiply_n(f: list, n: int):
     return [0]*n + f
 
-def division(m: list, n: list, p: int):
+def multiply_long_division(m: list, n: list, p: int):
     f = remove_leading_zeros(reduce_coefficients(m, p))
     g = remove_leading_zeros(reduce_coefficients(n, p))
     if len(g) == 0 or g == [0]: # Division by zero or an empty polynomial
@@ -41,7 +41,7 @@ def division(m: list, n: list, p: int):
         scalar = (r[len(r) - 1] * pow(g[len(g) - 1], -1, p)) % p
         degree_difference = len(r) - len(g) 
         # r = r - X^(degree_difference) * g * scalar
-        r = polynomial_subtraction(r, multiplyByXtoN(multiply_constant(g, scalar, p), degree_difference),p)
+        r = polynomial_subtraction(r, multiply_n(multiply_constant(g, scalar, p), degree_difference),p)
         q[degree_difference] = scalar # q = q + scalar*X^(degree_difference)
-    return (stripZeros(q), stripZeros(r))
+    return (remove_leading_zeros(q), remove_leading_zeros(r))
 
