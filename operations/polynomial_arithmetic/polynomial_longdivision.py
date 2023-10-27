@@ -4,8 +4,8 @@ from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_s
 
 def remove_leading_zeros(f):
     help = 0
-    reversed = reversed(f)
-    for i in reversed:
+    takel = reversed(f)
+    for i in takel:
         if i != 0:
             if help > 0:   return f[:-help]
             else:       return f
