@@ -11,7 +11,7 @@
 # Žilvinas Aleksa 1703749
 # Ainius Sinickas 1820516
 # Jonas Mieliauskas 1719408g
-# Gustas Šimkus 1704917
+# Gustas Gudaciauskas 1834304
 ##
 
 # Import built-in json library for handling input/output 
