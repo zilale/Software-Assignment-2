@@ -14,14 +14,14 @@ def reduce_coefficients(a, p):
         h[i] = h[i] % p
     return h
 
-def remove_leading_zeros(f):
-    helper = 0
-    reversed = f[::-1]
-    for i in reversed:
-        if i != 0:
-            if helper > 0:   return f[:-helper]
-            else:  return f
-        helper  += 1 
+def remove_leading_zeros(a):
+    c = 0
+    revA = reversed(a)
+    for item in revA:
+        if item != 0:
+            if c > 0:   return a[:-c]
+            else:       return a
+        c += 1
     return [0]
     
 def multiply_n(f: list, n: int):
