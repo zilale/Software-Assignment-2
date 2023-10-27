@@ -1,6 +1,4 @@
-from polynomial_addition import polynomial_addition
-from polynomial_multiplication import polynomial_multiplication
-from polynomial_subtraction import polynomial_subtraction
+from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 
 def multiply_constant(a, c, p):
     if a == None:
