@@ -1,21 +1,27 @@
-def polynomial_subtraction(f : list, g : list, p : int):
+#Function to subtract two polynomials f and g under the given modulus m
+
+# Input: Two polynomials f and g, and a modulus m
+# Output: A polynomial representing f - g under the given modulus m
+# Example:
+# f = [2, 1, 1]
+# g = [1, 1]
+# p = 3
+# print(polynomial_subtraction(f, g, p))
+def subtraction(f, g, m):
     answer = []
-    minimum = min(len(f), len(g))
-    maximum = max(len(f), len(g))
-
-    for i in range(minimum):
-        if f[i] - g[i] < 0:
-            answer.append(f[i] - g[i] + p)
-        else:
-            answer.append(f[i] - g[i])
-
-    for i in range(minimum, maximum):
-        if len(f) > len(g):
-            answer.append(f[i])
-        else:
-            answer.append(p - g[i])
-    
-    return answer 
+    maximum = max(len(f), len(g)) 
+    minimum = min(len(f), len(g)) 
+        
+    #appending 0s to answer list based on polynomial size to index it later    
+    for i in range(maximum): 
+        if (i < minimum): 
+            answer.append((f[i] - g[i]) % m)
+        else: 
+            if (len(f) > len(g)): 
+                answer.append(f[i])
+            else:
+                answer.append((-g[i]) % m) 
+    return answer
 
 
 # Test 1
