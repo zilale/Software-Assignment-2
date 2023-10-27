@@ -7,7 +7,7 @@
 # g = [1, 1]
 # p = 3
 # print(polynomial_subtraction(f, g, p))
-def subtraction(f, g, m):
+def polynomial_subtraction(f, g, m):
     answer = []
     maximum = max(len(f), len(g)) 
     minimum = min(len(f), len(g)) 
