@@ -3,6 +3,8 @@ from polynomial_multiplication import polynomial_multiplication
 from polynomial_subtraction import polynomial_subtraction
 
 def multiply_constant(a, c, p):
+    if a == None:
+        return []
     h = a.copy()
     for i in range(0, len(h)):
         h[i] = (h[i] * c) % p
