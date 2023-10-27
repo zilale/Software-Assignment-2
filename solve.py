@@ -9,7 +9,7 @@
 #
 # Author names and student IDs:
 # Žilvinas Aleksa 1703749
-# Ainius Sinickas 1704919
+# Ainius Sinickas 1820516
 # Jonas Mieliauskas 1719408g
 # Gustas Šimkus 1704917
 ##
@@ -93,4 +93,3 @@ def solve_exercise(exercise_location : str, answer_location : str):
     with open(answer_location, "w") as answer_file:
         # Serialize Python answer data (stored in answer) to JSON answer data and write it to answer_file
         json.dump(answer, answer_file, indent=4)
-    
