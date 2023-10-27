@@ -2,53 +2,58 @@ from operations.polynomial_arithmetic.polynomial_addition import polynomial_addi
 from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 
+def multiply_constant(a, c, p):
+    h = a.copy()
+    for i in range(0, len(h)):
+        h[i] = (h[i] * c) % p
+    return h
+
+def reduce_coefficients(a, p):
+    h = a.copy()
+    for i in range(0, len(h)):
+        h[i] = h[i] % p
+    return h
 
 def remove_leading_zeros(f):
-    for i in range(len(f)):
-        if f[-1] == 0 and f.count(f[0]) != len(f):
-            del f[-1]
+    h = f.copy()
+    for i in range(len(h)):
+        if h[-1] == 0 and h.count(h[0]) != len(h):
+            del h[-1]
         else:
-            break
+            return h
+    
+# Function to answeriply two polynomials f and g under the given modulus m
+# Input: Two polynomials f and g in F[x] represented as arrays of coefficients
+#        and a modulus m
+# Output: A polynomial representing f * g under the given modulus m
+# Example:
+# f = [2, 1, 1]
 
-def polynomial_long_division(f, g, p):
-    if all(coef == 0 for coef in g):  # Check if g is the zero polynomial
-        raise ValueError("Division by zero polynomial is undefined!")
+def polynomial_long_division(m, n, p):
+    f = remove_leading_zeros(reduce_coefficients(m, p))
+    g = remove_leading_zeros(reduce_coefficients(n, p))
 
-    q = []
+    # if f is 0 or g is 0, return None
+    if len(g) == 0 or g == [0]: 
+        return None
+    
+    # if f is 0 or g is 0, return None
+    if len(f) < len(g) or ((len(f) == 1 and len(g) == 1) and f[0] < g[0]): 
+        return ([0], f)
+    
+    # if f is 0 or g is 0, return None
+    q = [0] * len(f) 
     r = f.copy()
 
-    while len(r) >= len(g):
-        # Calculate the factor to make the leading coefficient of r match the leading coefficient of g
-        term_mul_factor = r[-1] * pow(g[-1], -1, p)
-        term_mul_position = len(r) - len(g)
+    # if f is 0 or g is 0, return None
+    while (len(r) >= len(g) and r != [0]):
+        skaliarinis = (r[len(r) - 1] * pow(g[len(g) - 1], -1, p)) % p
+        degree_difference = len(r) - len(g) 
 
-        intermediate = [0] * (term_mul_position + 1)
-        intermediate[term_mul_position] = term_mul_factor
-        q = polynomial_addition(q, intermediate, p)
+        helper = multiply_constant(g, skaliarinis, p)
+        helper2 = [0] * degree_difference + helper
 
-        subtracted = polynomial_multiplication(intermediate, g, p)
-        r = polynomial_subtraction(r, subtracted, p)
-        remove_leading_zeros(r)
+        r = polynomial_subtraction(r, helper2, p)
+        q[degree_difference] = skaliarinis
+    return (remove_leading_zeros(q), remove_leading_zeros(r))
 
-        # If the remainder becomes the zero polynomial, break
-        if not r:
-            break
-
-    return q, r
-
-# Example usage:
-# f = [1, 0]  # Represents 1X
-# g = [1]    # Represents 1
-
-# q, r = polynomial_long_division(f, g, 3)
-# print("Quotient:", q)  # Expected: [1, 0]
-# print("Remainder:", r) # Expected: []
-
-# # # Example usage:
-# # f = [1, 0, 2]  # Represents 1 + 2X^2
-# # g = [1, 1]    # Represents 1 + X
-# # p = 3
-
-# # q, r = polynomial_long_division(f, g, p)
-# # print("Quotient:", q)  # Expected: [2]
-# # print("Remainder:", r) # Expected: [1]

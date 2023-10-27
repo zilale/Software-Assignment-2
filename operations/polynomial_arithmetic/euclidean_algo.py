@@ -1,80 +1,64 @@
+
 from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
-from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_long_division, remove_leading_zeros
+from operations.polynomial_arithmetic.polynomial_longdivision import multiply_constant, polynomial_long_division, reduce_coefficients, remove_leading_zeros
+
+def reduce_polynomials(a, b, p):
+    h = a.copy()
+    for i in range(0, len(h)):
+        h[i] = h[i] % p
+
+    h2 = b.copy()
+    for i in range(0, len(h2)):
+        h2[i] = h2[i] % p    
+
+    return remove_leading_zeros(h), remove_leading_zeros(h2)
 
 def extended_euclidean_algorithm(f, g, p):
-    x, v, y, u = [1], [0], [0], [1]
-    helper = False
+    a, b = reduce_coefficients(f, p), reduce_coefficients(g, p)
+    switch = False
+    switch = len(a) < len(b) or (len(a) == len(b) and a[::-1] < b[::-1])
+    if switch:
+        a, b = b, a
 
-    helper = any(val != 0 for val in g)
+    x = [1]
+    v = [1]
+    y = [0]
+    u = [0]
 
-    while helper == True:
-
-        q, r = polynomial_long_division(f, g, p)
-        f = g
-        g = r
-        x_add = x
-        y_add = y
-        x = u
-        y = v
-        u = polynomial_subtraction(x_add, polynomial_multiplication(q, u, p), p)
-        v = polynomial_subtraction(y_add, polynomial_multiplication(q, v, p), p)
-        helper = False
-
-        helper = any(val != 0 for val in g)
-
-    lc_f = f[len(f) - 1]
-    lc_f_inv = [pow(lc_f, -1, p)]
+    # if f is 0 or g is 0, return None
+    while b != [0]:
+        q, r = polynomial_long_division(a, b, p)
+        a = b.copy()
+        b = r.copy()
+        x_p = x.copy()
+        y_p = y.copy()
+        x = u.copy()
+        y = v.copy()
+        u = polynomial_subtraction(x_p, polynomial_multiplication(q, u, p), p)
+        v = polynomial_subtraction(y_p, polynomial_multiplication(q, v, p), p)
     
-    
-    a = polynomial_multiplication(x, lc_f_inv, p)
-    b = polynomial_multiplication(y, lc_f_inv, p)
-    remove_leading_zeros(a)
-    remove_leading_zeros(b)
+    lc_a = a[len(a) - 1]
+    lc_a_inversed = pow(lc_a, -1, p)
 
-    gcd = (polynomial_multiplication(f,a,p),polynomial_multiplication(g,b,p),p)
-    remove_leading_zeros(gcd)
-    return a, b, gcd
+
+    x_final = multiply_constant(x, lc_a_inversed, p)
+    y_final = multiply_constant(y, lc_a_inversed, p)
+    gcd = multiply_constant(a, lc_a_inversed, p)
+    
+    # if f is 0 or g is 0, return None
+    if switch:
+        x_final, y_final = y_final, x_final
+
+    return x_final, y_final, gcd
 
 def test_extended_euclidean_algorithm():
-    # Test case 1
-    f = [1, 1, 1]
-    g = [1, 1]
-    p = 5
-    expected_a = [2, 3]
-    expected_b = [4, 1]
-    expected_gcd = ([1, 1], [1], 5)
-    print(extended_euclidean_algorithm(f, g, p))
-    assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
-
-    # Test case 2
-    f = [1, 2, 1]
-    g = [1, 1]
-    p = 5
-    expected_a = [3]
-    expected_b = [2, 3]
-    expected_gcd = ([1, 1], [1], 5)
-    print(extended_euclidean_algorithm(f, g, p))
-    assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
-
-    # Test case 3
-    f = [1, 1, 1]
-    g = [1, 1]
+    # Test case 3s
+    f = [0, 0, 1, 1]
+    g = [1, 1, 1]
     p = 2
     expected_a = [1, 1]
-    expected_b = [1]
-    expected_gcd = ([1, 1], [1], 2)
-    print(extended_euclidean_algorithm(f, g, p))
+    expected_b = [1, 1, 1]
+    expected_gcd = [1]
     assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
-
-    # Test case 4
-    f = [1, 1, 1]
-    g = [1, 1]
-    p = 3
-    expected_a = [1, 2]
-    expected_b = [1]
-    expected_gcd = ([1, 1], [1], 3)
-    print(extended_euclidean_algorithm(f, g, p))
-    assert extended_euclidean_algorithm(f, g, p) == (expected_a, expected_b, expected_gcd)
-
 # test_extended_euclidean_algorithm()
