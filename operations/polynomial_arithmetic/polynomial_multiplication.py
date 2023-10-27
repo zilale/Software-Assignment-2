@@ -24,16 +24,25 @@ def remove_leading_zeros(a):
 # f = [2, 1, 1]
 # g = [1, 1]
 # p = 3
-def polynomial_multiplication(f, g, p):
-    ans = [0] * (len(f) + len(g) - 1) 
-    helper1 = 0
-    for i in f:
-        helper2 = 0
-        for j in g:
-            ans[helper1+helper2] = (ans[helper1+helper2] + (i*j))%p
-            helper2+=1
-        helper1+=1
-    return remove_leading_zeros(ans)
+def polynomial_multiplication(f, g, m):
+    mult = []
+    maximum = max(len(f), len(g)) #to find the maximum length polynomial
+    minimum = min(len(f), len(g)) #to find the minimum length polynomial
+
+    #appending 0s to mult list based on polynomial size to index it later
+    for i in range(maximum + minimum-1):
+        mult.append(0)
+    
+    #checking if deg of polynomial f is greater than polynomial g
+    if (len(f) > len(g)):
+        for i in range(maximum):
+            for j in range(minimum):
+                mult[i+j] = (mult[i+j] + (f[i] * g[j])%m)%m
+    else:
+        for i in range(maximum):
+            for j in range(minimum):
+                mult[i+j] = (mult[i+j] + (g[i] * f[j])%m)%m
+    return mult
 
 
 

@@ -26,7 +26,7 @@ def remove_leading_zeros(a):
 def multiply_n(f: list, n: int):
     return [0]*n + f
 
-def multiply_long_division(m: list, n: list, p: int):
+def polynomial_long_division(m: list, n: list, p: int):
     f = remove_leading_zeros(reduce_coefficients(m, p))
     g = remove_leading_zeros(reduce_coefficients(n, p))
     if len(g) == 0 or g == [0]: # Division by zero or an empty polynomial
