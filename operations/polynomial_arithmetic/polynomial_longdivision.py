@@ -15,12 +15,14 @@ def reduce_coefficients(a, p):
     return h
 
 def remove_leading_zeros(f):
-    h = f.copy()
-    for i in range(len(h)):
-        if h[-1] == 0 and h.count(h[0]) != len(h):
-            del h[-1]
-        else:
-            return h
+    helper = 0
+    reversed = f[::-1]
+    for i in reversed:
+        if i != 0:
+            if helper > 0:   return f[:-helper]
+            else:  return f
+        helper  += 1 
+    return [0]
     
 def multiply_n(f: list, n: int):
     return [0]*n + f
