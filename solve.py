@@ -21,7 +21,7 @@ from operations.polynomial_arithmetic.polynomial_addition import polynomial_addi
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
 from operations.polynomial_arithmetic.polynomial_longdivision import remove_leading_zeros
-from operations.polynomial_arithmetic.euclidean_algo import extended_euclidefn_flgo
+from operations.polynomial_arithmetic.euclidean_algo import extended_euclidean_algorithm
 
 from operations.finite_fields_arithmetic.addition import finite_fields_addition
 from operations.finite_fields_arithmetic.subtraction import finite_fields_subtraction
@@ -90,7 +90,10 @@ def solve_exercise(exercise_location : str, answer_location : str):
 
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
+    print(answer)
     with open(answer_location, "w") as answer_file:
         # Serialize Python answer data (stored in answer) to JSON answer data and write it to answer_file
         json.dump(answer, answer_file, indent=4)
+
+solve_exercise("./Exercises/exercise0.json", "./answers/answer_0.json")
     
