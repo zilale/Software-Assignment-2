@@ -9,7 +9,7 @@
 #
 # Author names and student IDs:
 # Žilvinas Aleksa 1703749
-# Ainius Sinickas 1704919
+# Ainius Sinickas 1820516
 # Jonas Mieliauskas 1719408g
 # Gustas Šimkus 1704917
 ##
@@ -63,6 +63,13 @@ def solve_exercise(exercise_location : str, answer_location : str):
         
         elif exercise["task"] == "extended_euclidean_algorithm":
             answer = extended_euclidefn_flgo(exercise["f"], exercise["g"], exercise["p"])
+
+        elif exercise["task"] == "irreducibility_check":
+            answer = irreducibility_check(exercise["f"], exercise["integer_modulus"])
+
+        elif exercise["task"] == "irreducible_element_generation":
+            # Solve polynomial arithmetic irreducible element generation exercise
+            answer = irreducible_element_generation(exercise["integer_modulus"], exercise["degree"])
             
         # et cetera
     elif  exercise["type"] == "finite_field_arithmetic":
@@ -84,10 +91,12 @@ def solve_exercise(exercise_location : str, answer_location : str):
         
         elif exercise["task"] == "primitivity_check":
             answer = primitivity_checking(exercise["f"], exercise["m"], exercise["h"])
-            
-        # et cetera
+
+        elif exercise["task"] == "primitive_element_generation":
+            answer = primitive_element_generation(exercise["integer_modulus"],exercise["polynomial_modulus"])
 
 
+    answer = {"answer": answer}
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
     print(answer)
