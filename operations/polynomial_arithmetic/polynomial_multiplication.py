@@ -20,7 +20,7 @@ def remove_leading_zeros(lst):
 # f = [2, 1, 1]
 # g = [1, 1]
 # p = 3
-def polynmial_multiplication(f, g, p):
+def polynomial_multiplication(f, g, p):
     ans = [0] * (len(f) + len(g) - 1) 
     helper1 = 0
     for i in f:
