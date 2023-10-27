@@ -1,6 +1,6 @@
 from operations.polynomial_arithmetic.irreducibility_check import irreducibility_check
 
-def irreduciblePolyGen(m,n):
+def irreducible_element_generation(m,n):
     poly = []
 
     for i in range(n+1):
