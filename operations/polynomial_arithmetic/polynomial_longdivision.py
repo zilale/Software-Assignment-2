@@ -1,6 +1,6 @@
-from operations.polynomial_arithmetic.polynomial_addition import polynomial_addition
-from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
-from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
+from polynomial_addition import polynomial_addition
+from polynomial_multiplication import polynomial_multiplication
+from polynomial_subtraction import polynomial_subtraction
 
 def multiply_constant(a, c, p):
     h = a.copy()
@@ -22,38 +22,25 @@ def remove_leading_zeros(f):
         else:
             return h
     
-# Function to answeriply two polynomials f and g under the given modulus m
-# Input: Two polynomials f and g in F[x] represented as arrays of coefficients
-#        and a modulus m
-# Output: A polynomial representing f * g under the given modulus m
-# Example:
-# f = [2, 1, 1]
+def multiply_n(f: list, n: int):
+    return [0]*n + f
 
-def polynomial_long_division(m, n, p):
+def polynomial_long_division(m: list, n: list, p: int):
     f = remove_leading_zeros(reduce_coefficients(m, p))
     g = remove_leading_zeros(reduce_coefficients(n, p))
-
-    # if f is 0 or g is 0, return None
-    if len(g) == 0 or g == [0]: 
+    if len(g) == 0 or g == [0]: # Division by zero or an empty polynomial
         return None
-    
-    # if f is 0 or g is 0, return None
     if len(f) < len(g) or ((len(f) == 1 and len(g) == 1) and f[0] < g[0]): 
+        #f is of a smaller degree than g or they are both constants and f is smaller than g
         return ([0], f)
-    
-    # if f is 0 or g is 0, return None
-    q = [0] * len(f) 
+    q = [0] * len(f) # A maximum size list for the quotient of all zeros
     r = f.copy()
-
-    # if f is 0 or g is 0, return None
     while (len(r) >= len(g) and r != [0]):
-        skaliarinis = (r[len(r) - 1] * pow(g[len(g) - 1], -1, p)) % p
+        #scalar =  lc(r) * (lc(g))^(-1)
+        scalar = (r[len(r) - 1] * pow(g[len(g) - 1], -1, p)) % p
         degree_difference = len(r) - len(g) 
-
-        helper = multiply_constant(g, skaliarinis, p)
-        helper2 = [0] * degree_difference + helper
-
-        r = polynomial_subtraction(r, helper2, p)
-        q[degree_difference] = skaliarinis
+        # r = r - X^(degree_difference) * g * scalar
+        r = polynomial_subtraction(r, multiply_n(multiply_constant(g, scalar, p), degree_difference),p)
+        q[degree_difference] = scalar # q = q + scalar*X^(degree_difference)
     return (remove_leading_zeros(q), remove_leading_zeros(r))
 

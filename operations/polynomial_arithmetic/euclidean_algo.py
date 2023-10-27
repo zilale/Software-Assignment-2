@@ -46,7 +46,7 @@ def extended_euclidean_algorithm(f, g, p):
     y_final = multiply_constant(y, lc_a_inversed, p)
     gcd = multiply_constant(a, lc_a_inversed, p)
     
-    # if f is 0 or g is 0, return None
+
     if switch:
         x_final, y_final = y_final, x_final
 
