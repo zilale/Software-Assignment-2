@@ -20,8 +20,10 @@ import json
 from operations.polynomial_arithmetic.polynomial_addition import polynomial_addition
 from operations.polynomial_arithmetic.polynomial_subtraction import polynomial_subtraction
 from operations.polynomial_arithmetic.polynomial_multiplication import polynomial_multiplication
-from operations.polynomial_arithmetic.polynomial_longdivision import remove_leading_zeros
+from operations.polynomial_arithmetic.polynomial_longdivision import polynomial_long_division
 from operations.polynomial_arithmetic.euclidean_algo import extended_euclidean_algorithm
+from operations.polynomial_arithmetic.irreducibility_check import irreducibility_check
+from operations.polynomial_arithmetic.irreducible_element_generation import irreducible_element_generation
 
 from operations.finite_fields_arithmetic.addition import finite_fields_addition
 from operations.finite_fields_arithmetic.subtraction import finite_fields_subtraction
@@ -29,6 +31,7 @@ from operations.finite_fields_arithmetic.multiplication import finite_fields_mul
 from operations.finite_fields_arithmetic.division import finite_fields_division
 from operations.finite_fields_arithmetic.inverse import finite_fields_inversion
 from operations.finite_fields_arithmetic.primitivity_check import primitivity_checking
+from operations.finite_fields_arithmetic.primitive_element_generation import primitive_element_generation
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -59,10 +62,10 @@ def solve_exercise(exercise_location : str, answer_location : str):
             answer = polynomial_multiplication(exercise["f"], exercise["g"], exercise["p"])
         
         elif exercise["task"] == "long_division":
-            answer = remove_leading_zeros(exercise["f"], exercise["g"], exercise["p"])
+            answer = polynomial_long_division(exercise["f"], exercise["g"], exercise["p"])
         
         elif exercise["task"] == "extended_euclidean_algorithm":
-            answer = extended_euclidefn_flgo(exercise["f"], exercise["g"], exercise["p"])
+            answer = extended_euclidean_algorithm(exercise["f"], exercise["g"], exercise["p"])
 
         elif exercise["task"] == "irreducibility_check":
             answer = irreducibility_check(exercise["f"], exercise["integer_modulus"])
@@ -104,5 +107,5 @@ def solve_exercise(exercise_location : str, answer_location : str):
         # Serialize Python answer data (stored in answer) to JSON answer data and write it to answer_file
         json.dump(answer, answer_file, indent=4)
 
-solve_exercise("./Exercises/exercise0.json", "./answers/answer_0.json")
+solve_exercise("./Exercises/exercise4.json", "./Answers/answer_4.json")
     
