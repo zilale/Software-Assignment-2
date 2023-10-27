@@ -53,19 +53,19 @@ def solve_exercise(exercise_location : str, answer_location : str):
     if exercise["type"] == "polynomial_arithmetic":
         # Check what task within the polynomial arithmetic tasks we need to perform
         if exercise["task"] == "addition":
-            answer = polynomial_addition(exercise["f"], exercise["g"], exercise["p"])
+            answer = polynomial_addition(exercise["f"], exercise["g"], exercise["integer_modulus"])
             
         elif exercise["task"] == "subtraction":
-            answer = polynomial_subtraction(exercise["f"], exercise["g"], exercise["p"])
+            answer = polynomial_subtraction(exercise["f"], exercise["g"], exercise["integer_modulus"])
         
         elif exercise["task"] == "multiplication":
-            answer = polynomial_multiplication(exercise["f"], exercise["g"], exercise["p"])
+            answer = polynomial_multiplication(exercise["f"], exercise["g"], exercise["integer_modulus"])
         
         elif exercise["task"] == "long_division":
-            answer = polynomial_long_division(exercise["f"], exercise["g"], exercise["p"])
+            answer = polynomial_long_division(exercise["f"], exercise["g"], exercise["integer_modulus"])
         
         elif exercise["task"] == "extended_euclidean_algorithm":
-            answer = extended_euclidean_algorithm(exercise["f"], exercise["g"], exercise["p"])
+            answer = extended_euclidean_algorithm(exercise["f"], exercise["g"], exercise["integer_modulus"])
 
         elif exercise["task"] == "irreducibility_check":
             answer = irreducibility_check(exercise["f"], exercise["integer_modulus"])
@@ -78,22 +78,22 @@ def solve_exercise(exercise_location : str, answer_location : str):
     elif  exercise["type"] == "finite_field_arithmetic":
         # Check what task within the finite field arithmetic tasks we need to perform
         if exercise["task"] == "addition":
-            answer = finite_fields_addition(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_addition(exercise["f"], exercise["g"], exercise["integer_modulus"], exercise["polynomial_modulus"])
             
         elif exercise["task"] == "subtraction":
-            answer = finite_fields_subtraction(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_subtraction(exercise["f"], exercise["g"], exercise["integer_modulus"], exercise["polynomial_modulus"])
             
         elif exercise["task"] == "multiplication":
-            answer = finite_fields_multiplication(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_multiplication(exercise["f"], exercise["g"], exercise["integer_modulus"], exercise["polynomial_modulus"])
             
         elif exercise["task"] == "division":
-            answer = finite_fields_division(exercise["f"], exercise["g"], exercise["m"], exercise["h"])
+            answer = finite_fields_division(exercise["f"], exercise["g"], exercise["integer_modulus"], exercise["polynomial_modulus"])
         
         elif exercise["task"] == "inversion":
-            answer = finite_fields_inversion(exercise["f"], exercise["m"], exercise["h"])
+            answer = finite_fields_inversion(exercise["f"], exercise["integer_modulus"], exercise["polynomial_modulus"])
         
         elif exercise["task"] == "primitivity_check":
-            answer = primitivity_checking(exercise["f"], exercise["m"], exercise["h"])
+            answer = primitivity_checking(exercise["f"], exercise["integer_modulus"], exercise["polynomial_modulus"])
 
         elif exercise["task"] == "primitive_element_generation":
             answer = primitive_element_generation(exercise["integer_modulus"],exercise["polynomial_modulus"])

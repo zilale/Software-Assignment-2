@@ -36,3 +36,4 @@ def primitivity_checking(f, m, h):
         return False
     else:
         return True
+
