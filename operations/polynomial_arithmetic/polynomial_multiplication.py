@@ -13,31 +13,23 @@ def remove_leading_zeros(lst):
             break
 
 # Function to answeriply two polynomials f and g under the given modulus m
-# Input: Two polynomials f and g in F[x] represented as arrays of coefficients
+# Input: Two polynomials f and g in F[x] represented as arrays of coeffihelper1ents
 #        and a modulus m
 # Output: A polynomial representing f * g under the given modulus m
 # Example:
 # f = [2, 1, 1]
 # g = [1, 1]
 # p = 3
-def polynomial_multiplication(f, g, p):
-    answer = []
-    maximum = max(len(f), len(g)) 
-    minimum = min(len(f), len(g)) 
-
-    #appending 0s to answer list based on polynomial size to index it later
-    answer.extend([0] * (maximum + minimum - 1))
-    
-    #checking if deg of polynomial f is greater than polynomial g
-    if (len(f) > len(g)):
-        for i in range(maximum):
-            for j in range(minimum):
-                answer[i+j] = (answer[i+j] + (f[i] * g[j])%p)%p
-    else:
-        for i in range(maximum):
-            for j in range(minimum):
-                answer[i+j] = (answer[i+j] + (g[i] * f[j])%p)%p
-    return answer
+def polynmial_multiplication(f, g, p):
+    ans = [0] * (len(f) + len(g) - 1) 
+    helper1 = 0
+    for i in f:
+        helper2 = 0
+        for j in g:
+            ans[helper1+helper2] = (ans[helper1+helper2] + (i*j))%p
+            helper2+=1
+        helper1+=1
+    return remove_leading_zeros(ans)
 
 
 
